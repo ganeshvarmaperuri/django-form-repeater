@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<ul>
+    {% for grandparent in grandparents %}
+    <li class="text-capitalize">{{grandparent.name}}</li>
+    {% if grandparent.get_child %}
+    <ul>
+        {% for parent in grandparent.get_child %}
+        <li class="text-capitalize">{{parent.name}}</li>
+        {% if parent.get_child %}
+        <ul>
+            {% for child in parent.get_child %}
+            <li class="text-capitalize">{{child.name}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
